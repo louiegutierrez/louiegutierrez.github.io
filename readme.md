@@ -1,6 +1,26 @@
-# Welcome to my Personal Website Page
-## Hosted on Github Pages
+# Leonardo Gutierrez Portfolio
 
-### Here you'll find information on me and things I've been doing!
+Personal portfolio site built with React + TypeScript + Vite + Tailwind CSS.
 
-### **Website is a work in progress**
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Deploy (GitHub Pages)
+
+This repo uses GitHub Actions to deploy automatically from `main`.
+
+- Workflow: `.github/workflows/deploy.yml`
+- Build output: `dist/`
+- Site URL: `https://louiegutierrez.com`
+
+Note: do **not** commit `dist/`.
