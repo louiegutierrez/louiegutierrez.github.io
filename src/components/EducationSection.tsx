@@ -1,8 +1,8 @@
-import { motion } from "motion/react";
-import { GraduationCap } from "lucide-react";
-import { education } from "../data/education";
-import { fadeInUp, popIn } from "./animation";
-import { Card } from "./ui/Card";
+import { motion } from 'motion/react';
+import { GraduationCap } from 'lucide-react';
+import { education } from '../data/education';
+import { cardReveal, fadeInUp, stagger } from './animation';
+import { Card } from './ui/Card';
 
 export function EducationSection() {
   return (
@@ -16,19 +16,20 @@ export function EducationSection() {
           className="section-head"
         >
           <h2>Education</h2>
+          <div className="section-divider" />
           <p>Academic foundation and coursework relevant to software engineering.</p>
         </motion.div>
 
-        <div className="space-y-6">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="space-y-6"
+        >
           {education.map((entry) => (
-            <motion.div
-              key={entry.school}
-              variants={popIn}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <Card className="timeline-card space-y-5">
+            <motion.div key={entry.school} variants={cardReveal}>
+              <Card className="accent-panel timeline-card space-y-5" data-tone="blue">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <h3 className="flex items-center gap-2 text-xl font-semibold text-white">
@@ -38,30 +39,27 @@ export function EducationSection() {
                     <p className="mt-1 text-sm text-slate-300">{entry.degree}</p>
                     <p className="mt-1 text-xs text-slate-400">{entry.location}</p>
                   </div>
-                  <span className="rounded-full border border-emerald-300/40 bg-emerald-300/10 px-3 py-1 text-xs font-semibold text-emerald-200">
+                  <span className="tech-chip" data-tone="emerald">
                     {entry.dateRange}
                   </span>
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <p className="text-sm font-semibold text-white">GPA</p>
-                    <p className="text-sm text-slate-300">{entry.gpa}</p>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">GPA</p>
+                    <p className="mt-1 text-sm text-slate-200">{entry.gpa}</p>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">Honors</p>
-                    <p className="text-sm text-slate-300">{entry.honors.join(" • ")}</p>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Honors</p>
+                    <p className="mt-1 text-sm text-slate-200">{entry.honors.join(' • ')}</p>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-white">Relevant Coursework</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Relevant Coursework</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {entry.coursework.map((course) => (
-                      <span
-                        key={course}
-                        className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-slate-300"
-                      >
+                      <span key={course} className="tech-chip" data-tone="blue">
                         {course}
                       </span>
                     ))}
@@ -70,7 +68,7 @@ export function EducationSection() {
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

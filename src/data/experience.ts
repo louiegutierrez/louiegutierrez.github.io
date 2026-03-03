@@ -24,7 +24,7 @@ export const experience: ExperienceEntry[] = [
     title: "Undergraduate Teaching Assistant",
     organization: "University of California, Irvine",
     location: "Irvine, CA",
-    dateRange: "Sep. 2023 - Jan. 2026",
+    dateRange: "Sep. 2025 - Jan. 2026",
     bullets: [
       "Taught core CS concepts including OOP, functional programming, recursion, asymptotic analysis, and Python fundamentals.",
       "Guided 100+ students through debugging, algorithm design, and coursework comprehension during office hours.",

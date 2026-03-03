@@ -1,7 +1,23 @@
-import { motion } from "motion/react";
-import { skillCategories } from "../data/skills";
-import { fadeInUp, stagger } from "./animation";
-import { Card } from "./ui/Card";
+import { motion } from 'motion/react';
+import { Code, BookOpen, Wrench, Cloud, Database, Cpu } from 'lucide-react';
+import { skillCategories, type SkillCategoryIcon } from '../data/skills';
+import { cardReveal, chipReveal, fadeInUp, stagger } from './animation';
+import { Card } from './ui/Card';
+
+const iconMap: Record<SkillCategoryIcon, typeof Code> = {
+  code: Code,
+  book: BookOpen,
+  wrench: Wrench,
+  cloud: Cloud,
+  database: Database,
+  cpu: Cpu,
+};
+
+const highlights = [
+  { number: '3.84', label: 'GPA', sublabel: "14x Dean's Honor List" },
+  { number: '1000+', label: 'Support Tickets', sublabel: 'Resolved at UCI OIT' },
+  { number: '100+', label: 'Students Taught', sublabel: 'As Undergraduate LA' },
+];
 
 export function SkillsSection() {
   return (
@@ -14,48 +30,56 @@ export function SkillsSection() {
           viewport={{ once: true, amount: 0.2 }}
           className="section-head"
         >
-          <h2>Technical Skills</h2>
-          <p>Resume-aligned stack across languages, frameworks, tools, concepts, and libraries.</p>
+          <h2>Skills & Technologies</h2>
+          <div className="section-divider section-divider-purple" />
+          <p>A toolkit shaped by academic projects, professional support work, and continuous learning.</p>
         </motion.div>
 
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.15 }}
           className="grid gap-6 md:grid-cols-2 xl:grid-cols-3"
         >
-          {skillCategories.map((category) => (
-            <motion.div key={category.title} variants={fadeInUp}>
-              <Card className="space-y-5">
-                <h3 className="text-lg font-semibold text-white">{category.title}</h3>
-                <div className="space-y-3">
-                  {category.skills.map((skill) => (
-                    <div key={skill.name} className="space-y-1.5">
-                      {typeof skill.level === "number" ? (
-                        <>
-                          <div className="flex items-center justify-between text-sm text-slate-300">
-                            <span>{skill.name}</span>
-                            <span>{skill.level}%</span>
-                          </div>
-                          <div className="h-2 overflow-hidden rounded-full bg-slate-800">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${skill.level}%` }}
-                              viewport={{ once: true, amount: 0.2 }}
-                              transition={{ duration: 0.75, ease: "easeOut" }}
-                              className={`h-full rounded-full bg-gradient-to-r ${category.accent}`}
-                            />
-                          </div>
-                        </>
-                      ) : (
-                        <span className="inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-slate-300">
-                          {skill.name}
-                        </span>
-                      )}
+          {skillCategories.map((category) => {
+            const Icon = iconMap[category.icon];
+            return (
+              <motion.div key={category.title} variants={cardReveal}>
+                <Card className="accent-panel skill-panel group h-full space-y-5 border-transparent" data-tone={category.tone}>
+                  <div className="flex items-center gap-3">
+                    <div className="skill-icon" data-tone={category.tone}>
+                      <Icon className="h-5 w-5" />
                     </div>
-                  ))}
-                </div>
+                    <h3 className="text-lg font-semibold text-white">{category.title}</h3>
+                  </div>
+
+                  <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <motion.span key={`${category.title}-${skill.name}`} variants={chipReveal} whileHover={{ scale: 1.04 }} className="tech-chip" data-tone={category.tone}>
+                        {skill.name}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          className="mt-10 grid gap-4 md:grid-cols-3"
+        >
+          {highlights.map((item) => (
+            <motion.div key={item.label} variants={cardReveal}>
+              <Card className="accent-panel stat-card text-center" data-tone="emerald">
+                <p className="text-3xl font-semibold text-emerald-300 md:text-4xl">{item.number}</p>
+                <p className="mt-2 text-base font-semibold text-white">{item.label}</p>
+                <p className="mt-1 text-xs text-slate-300">{item.sublabel}</p>
               </Card>
             </motion.div>
           ))}

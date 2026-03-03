@@ -1,5 +1,5 @@
-import type { HTMLAttributes } from "react";
-import { cn } from "./cn";
+import type { HTMLAttributes } from 'react';
+import { cn } from './cn';
 
 export type CardProps = HTMLAttributes<HTMLDivElement>;
 
@@ -7,8 +7,8 @@ export function Card({ className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        "rounded-2xl border border-white/10 bg-slate-900/40 p-6 shadow-[0_20px_80px_-40px_rgba(16,185,129,0.5)] backdrop-blur-sm",
-        className
+        'rounded-2xl border border-transparent bg-[rgba(13,20,32,0.72)] p-6 shadow-[0_18px_60px_-34px_rgba(15,23,42,0.85)] backdrop-blur-md',
+        className,
       )}
       {...props}
     />

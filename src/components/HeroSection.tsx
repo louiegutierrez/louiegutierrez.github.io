@@ -1,103 +1,111 @@
-import { motion } from "motion/react";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
-import { profile } from "../data/profile";
-import { Button } from "./ui/Button";
-import { fadeInUp } from "./animation";
+import { motion } from 'motion/react';
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { profile } from '../data/profile';
+import { Button } from './ui/Button';
+import { heroIntro } from './animation';
 
-const stars = [
-  { left: "8%", top: "14%", delay: 0 },
-  { left: "26%", top: "72%", delay: 0.4 },
-  { left: "39%", top: "22%", delay: 0.8 },
-  { left: "64%", top: "61%", delay: 1.2 },
-  { left: "79%", top: "18%", delay: 1.6 },
-  { left: "91%", top: "74%", delay: 2 },
-];
+const profileImage = '/img/new-profile.png'; // Update with your new profile image path
+
+const stars = Array.from({ length: 48 }).map((_, index) => {
+  const row = index % 12;
+  const col = Math.floor(index / 12);
+  return {
+    left: `${6 + row * 8 + (col % 2 === 0 ? 1 : 4)}%`,
+    top: `${10 + col * 22 + (row % 2 === 0 ? 2 : 8)}%`,
+    delay: Number((index * 0.09).toFixed(2)),
+    duration: 2.6 + (index % 5) * 0.35,
+  };
+});
 
 export function HeroSection() {
   return (
-    <section id="home" className="portfolio-hero relative flex min-h-screen items-center overflow-hidden">
+    <section id="home" className="portfolio-hero relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         {stars.map((star) => (
           <motion.span
             key={`${star.left}-${star.top}`}
             className="portfolio-star"
-            initial={{ opacity: 0.1, scale: 0.7 }}
-            animate={{ opacity: [0.25, 1, 0.25], scale: [0.8, 1.35, 0.8] }}
-            transition={{ duration: 2.8, repeat: Infinity, delay: star.delay }}
+            initial={{ opacity: 0.1, scale: 0.65 }}
+            animate={{ opacity: [0.15, 1, 0.2], scale: [0.7, 1.35, 0.8] }}
+            transition={{ duration: star.duration, repeat: Infinity, delay: star.delay }}
             style={{ left: star.left, top: star.top }}
           />
         ))}
       </div>
 
-      <motion.div
-        variants={fadeInUp}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-7 px-4 pb-16 pt-28 text-center md:px-6"
-      >
-        <p className="text-sm uppercase tracking-[0.35em] text-emerald-300">Software Engineer Portfolio</p>
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-4 pb-20 pt-28 text-center md:px-6">
+        <motion.div custom={0.12} variants={heroIntro} initial="hidden" animate="visible" className="mb-6 flex justify-center">
+          <div className="hero-avatar-glow">
+            <img src={profileImage} alt={profile.name} className="hero-avatar" />
+          </div>
+        </motion.div>
 
-        <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white md:text-6xl">
+        <motion.p custom={0.2} variants={heroIntro} initial="hidden" animate="visible" className="mb-4 text-sm uppercase tracking-[0.28em] text-emerald-300">
+          Software Engineer Portfolio
+        </motion.p>
+
+        <motion.h1 custom={0.3} variants={heroIntro} initial="hidden" animate="visible" className="max-w-4xl text-4xl font-semibold leading-tight text-white md:text-7xl">
           {profile.name}
-        </h1>
+        </motion.h1>
 
-        <p className="text-lg text-emerald-200 md:text-2xl">{profile.role}</p>
+        <motion.p custom={0.42} variants={heroIntro} initial="hidden" animate="visible" className="mt-4 text-xl text-slate-200 md:text-4xl">
+          {profile.role}
+        </motion.p>
 
-        <p className="max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
+        <motion.p custom={0.56} variants={heroIntro} initial="hidden" animate="visible" className="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
           {profile.tagline}
-        </p>
+        </motion.p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <motion.div custom={0.74} variants={heroIntro} initial="hidden" animate="visible" className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <Button
             size="lg"
-            onClick={() =>
-              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
-            }
+            className="px-8"
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            View Projects
+            View My Work
           </Button>
 
           <motion.a
-            whileHover={{ scale: 1.06 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             href={profile.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="icon-chip"
+            className="media-overlay-button"
             aria-label="GitHub"
           >
             <Github className="h-5 w-5" />
           </motion.a>
           <motion.a
-            whileHover={{ scale: 1.06 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             href={profile.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="icon-chip"
+            className="media-overlay-button"
             aria-label="LinkedIn"
           >
             <Linkedin className="h-5 w-5" />
           </motion.a>
           <motion.a
-            whileHover={{ scale: 1.06 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             href={`mailto:${profile.email}`}
-            className="icon-chip"
+            className="media-overlay-button"
             aria-label="Email"
           >
             <Mail className="h-5 w-5" />
           </motion.a>
-        </div>
+        </motion.div>
 
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-300"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity }}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
         >
           <ArrowDown className="h-6 w-6" />
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,74 +1,107 @@
 export type Skill = {
   name: string;
-  level?: number;
 };
+
+export type SkillCategoryTone =
+  | 'emerald'
+  | 'blue'
+  | 'purple'
+  | 'cyan'
+  | 'pink'
+  | 'orange';
+
+export type SkillCategoryIcon =
+  | 'code'
+  | 'book'
+  | 'wrench'
+  | 'cloud'
+  | 'database'
+  | 'cpu';
 
 export type SkillCategory = {
   title: string;
-  accent: string;
+  tone: SkillCategoryTone;
+  icon: SkillCategoryIcon;
   skills: Skill[];
 };
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: "Languages",
-    accent: "from-emerald-400 to-cyan-400",
+    title: 'Languages',
+    tone: 'emerald',
+    icon: 'code',
     skills: [
-      { name: "Java", level: 90 },
-      { name: "Python", level: 92 },
-      { name: "C/C++", level: 82 },
-      { name: "SQL (MySQL)", level: 80 },
-      { name: "JavaScript", level: 85 },
-      { name: "HTML/CSS", level: 88 },
+      { name: 'Java' },
+      { name: 'Python' },
+      { name: 'C/C++' },
+      { name: 'SQL (MySQL)' },
+      { name: 'JavaScript' },
+      { name: 'HTML/CSS' },
     ],
   },
   {
-    title: "Frameworks",
-    accent: "from-indigo-400 to-violet-400",
+    title: 'Frameworks',
+    tone: 'blue',
+    icon: 'book',
     skills: [
-      { name: "React", level: 86 },
-      { name: "Node.js", level: 84 },
-      { name: "Flask", level: 80 },
-      { name: "FastAPI", level: 79 },
-      { name: "JUnit", level: 76 },
+      { name: 'React' },
+      { name: 'Node.js' },
+      { name: 'Flask' },
+      { name: 'FastAPI' },
+      { name: 'JUnit' },
+      { name: 'Express' },
     ],
   },
   {
-    title: "Developer Tools",
-    accent: "from-amber-400 to-orange-400",
+    title: 'Developer Tools',
+    tone: 'purple',
+    icon: 'wrench',
     skills: [
-      { name: "Git" },
-      { name: "Docker" },
-      { name: "AWS" },
-      { name: "GCP" },
-      { name: "Linux" },
-      { name: "VS Code" },
-      { name: "IntelliJ" },
-      { name: "PyCharm" },
-      { name: "ServiceNow" },
+      { name: 'Git' },
+      { name: 'Docker' },
+      { name: 'VS Code' },
+      { name: 'IntelliJ' },
+      { name: 'PyCharm' },
+      { name: 'Linux' },
     ],
   },
   {
-    title: "Concepts",
-    accent: "from-fuchsia-400 to-pink-400",
+    title: 'Cloud & DevOps',
+    tone: 'cyan',
+    icon: 'cloud',
     skills: [
-      { name: "REST APIs" },
-      { name: "CI/CD" },
-      { name: "Unit Testing" },
-      { name: "Networking" },
-      { name: "Object-Oriented Programming" },
-      { name: "Data Structures" },
+      { name: 'AWS' },
+      { name: 'GCP' },
+      { name: 'ServiceNow' },
+      { name: 'CI/CD' },
+      { name: 'Tomcat' },
+      { name: 'EC2' },
     ],
   },
   {
-    title: "Libraries",
-    accent: "from-sky-400 to-blue-500",
+    title: 'Data & ML',
+    tone: 'pink',
+    icon: 'database',
     skills: [
-      { name: "Pandas" },
-      { name: "NumPy" },
-      { name: "Matplotlib" },
-      { name: "BeautifulSoup" },
-      { name: "NLTK" },
+      { name: 'MySQL' },
+      { name: 'Pandas' },
+      { name: 'NumPy' },
+      { name: 'PyTorch' },
+      { name: 'NLTK' },
+      { name: 'BeautifulSoup' },
+    ],
+  },
+  {
+    title: 'Concepts',
+    tone: 'orange',
+    icon: 'cpu',
+    skills: [
+      { name: 'REST APIs' },
+      { name: 'Object-Oriented Programming' },
+      { name: 'Data Structures' },
+      { name: 'Algorithms' },
+      { name: 'Networking' },
+      { name: 'Unit Testing' },
     ],
   },
 ];
