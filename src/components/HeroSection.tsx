@@ -4,7 +4,7 @@ import { profile } from '../data/profile';
 import { Button } from './ui/Button';
 import { heroIntro } from './animation';
 
-const profileImage = '/img/new-profile.png'; // Update with your new profile image path
+const profileImage = 'img/new-profile.png'; // Update with your new profile image path
 
 const stars = Array.from({ length: 48 }).map((_, index) => {
   const row = index % 12;
